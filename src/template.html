@@ -3,8 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TO-DO</title>
 </head>
 <body>
+    <div id="bar">TO-DO</div>
+    <div id="content">
+        <div id="navbar">
+            <div id="Home">Home</div>
+            <div id="Today">Today</div>
+            <div id="Week">Week</div>
+            <div id="Projects">Projects</div>
+            <button id="modalOpen">+</button>
+        </div>
+        <dialog id="addTodoDialog">
+            <form method="dialog" id="addTodoForm">
+                    <label for="title"><div>Title:</div><input type="text" id="title" name="todoTitle" required></label>
+                    <label for="desc"><div>Description:</div><textarea id="desc" name="todoDescription" rows="4" cols="40" required></textarea></label>
+                    <label for="dueDate"><div>Due Date:</div><input type="date" id="dueDate" name="todoDueDate" required></label>
+                    <fieldset>
+                        <legend>Priority</legend>
+                        <label for="Urgent"><div>Urgent</div><input type="radio" id="Urgent" name="todoPriority" value="urgent" checked></label>
+                        <label for="High"><div>High</div><input type="radio" id="High" name="todoPriority" value="high"></label>
+                        <label for="Medium"><div>Medium</div><input type="radio" id="Medium" name="todoPriority" value="medium"></label>
+                        <label for="Low"><div>Low</div><input type="radio" id="Low" name="todoPriority" value="low"></label>
+                    </fieldset>
+                    <div><button autofocus type="submit" id="submitButton">Add</button> <button autofocus id="modalClose">Close</button></div>
+            </form>
+        </dialog>
+    </div>
 </body>
 </html>
