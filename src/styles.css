@@ -23,16 +23,17 @@
 }
 
 #navbar {
-    background-color: #F4F4F4;
+    background-color: #E9E9E9;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
+    border-right: 1px solid black;
 }
 
 #navbar > * {
     margin-top: 40px;
     margin-left: 20px;
-    font-size: 32px;
+    font-size: 20px;
 }
 
 #navbar > button {
@@ -83,3 +84,31 @@ fieldset {
     margin-right: 10px;
 }
 
+#todoItems > * {
+    display: flex;
+    background-color: #E9E9E9;
+    margin: 20px;
+    height: 40px;
+    align-items: center;
+}
+
+.completed {
+    height: 20px;
+    width: 20px;
+    accent-color: #90EE90;
+    background-color: #FFFFFF;
+    margin-left: 20px;
+}
+
+.title {
+    margin-left: 20px;
+}
+
+.detailButton {
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.due {
+    margin-right: 20px;
+}
