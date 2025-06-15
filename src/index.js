@@ -82,7 +82,7 @@ function todoUpdate(todoList, arr){
 
             descDialog.append(dialogTitle, priority, dialogDueDate, description);
             outerDiv.append(checkbox, title, detailButton, dueDate, descDialog);
-            todoList.insertBefore(outerDiv, document.querySelectorAll(".todoItem")[index]);
+            todoList.insertBefore(outerDiv, todoList.childNodes[index]);
 
             //Add event listener to the button to open the description modal
             detailButton.addEventListener("click", () => {
