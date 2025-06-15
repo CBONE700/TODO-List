@@ -28,7 +28,6 @@ submit.addEventListener("click", (e) => {
     else {
         insertTodoSorted(createTodoFromForm());
         todoUpdate(todoItems, todoList);
-        console.log(todoList);
         dialog.close();
         e.preventDefault();
     }
@@ -43,7 +42,7 @@ close.addEventListener("click", (e) => {
 
 //Update the dom
 function todoUpdate(todoList, arr){
-    for (let item of arr) {
+    for (let [index, item] of arr.entries()) {
         //put into if statement to check if exists by id
         if (!document.querySelector(`[data-id="${item.id}"]`)){
             const outerDiv = document.createElement("div");
@@ -83,7 +82,7 @@ function todoUpdate(todoList, arr){
 
             descDialog.append(dialogTitle, priority, dialogDueDate, description);
             outerDiv.append(checkbox, title, detailButton, dueDate, descDialog);
-            todoList.appendChild(outerDiv);
+            todoList.insertBefore(outerDiv, document.querySelectorAll(".todoItem")[index]);
 
             //Add event listener to the button to open the description modal
             detailButton.addEventListener("click", () => {
