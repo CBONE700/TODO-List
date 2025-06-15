@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 class todoItem{
     constructor(title, desc, due, prio, checklist) {
         this.title = title;
@@ -5,6 +7,7 @@ class todoItem{
         this.due = due;
         this.prio = prio;
         this.checklist = checklist;
+        this.id = uuidv4();
     }
 }
 

@@ -1,5 +1,6 @@
 import "./styles.css";
 import { todoItem } from "./new-todo";
+import { de } from "date-fns/locale";
 
 //Array for storage
 let todoList = [];
@@ -42,17 +43,54 @@ close.addEventListener("click", (e) => {
 
 //Update the dom
 function todoUpdate(todoList, arr){
-    todoList.innerHTML = '';
     for (let item of arr) {
-        todoList.innerHTML += 
-        `<div id="${item.title}">
-            <input type="checkbox" class="completed">
-            <div class="title">${item.title}</div>
-            <button class="detailButton">Details</button>
-            <div class="due">${item.due.getDate()}-${item.due.getMonth() + 1}-${item.due.getFullYear()}</div>
-        </div>`;
+        //put into if statement to check if exists by id
+        if (!document.querySelector(`[data-id="${item.id}"]`)){
+            const outerDiv = document.createElement("div");
+            outerDiv.className = "todoItem";
+            outerDiv.setAttribute('data-id', item.id);
+        
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.className = "completed";
+
+            const title = document.createElement("div");
+            title.textContent = `${item.title}`;
+            title.className = "title";
+
+            const detailButton = document.createElement("button");
+            detailButton.textContent = "Details";
+            detailButton.className = "detailButton";
+
+            const dueDate = document.createElement("div");
+            dueDate.textContent = `${String(item.due.getDate()).padStart(2, 0)}-${String(item.due.getMonth() + 1).padStart(2, 0)}-${item.due.getFullYear()}`
+            dueDate.className = "due";
+
+            //Create dialog that contains extra information
+            const descDialog = document.createElement("dialog");
+
+            const dialogTitle = document.createElement("h1");
+            dialogTitle.textContent = `${item.title}`;
+
+            const priority = document.createElement("div");
+            priority.textContent = `${item.prio}`;
+
+            const dialogDueDate = document.createElement("div");
+            dialogDueDate.textContent = `${String(item.due.getDate()).padStart(2, 0)}-${String(item.due.getMonth() + 1).padStart(2, 0)}-${item.due.getFullYear()}`;
+
+            const description = document.createElement("div");
+            description.textContent = `${item.desc}`;
+
+            descDialog.append(dialogTitle, priority, dialogDueDate, description);
+            outerDiv.append(checkbox, title, detailButton, dueDate, descDialog);
+            todoList.appendChild(outerDiv);
+
+            //Add event listener to the button to open the description modal
+            detailButton.addEventListener("click", () => {
+                descDialog.showModal();
+            })
+        }
     }
-    console.log(todoList.innerHTML);
 }
 
 //Create new todo object
