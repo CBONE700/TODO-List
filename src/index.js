@@ -1,11 +1,10 @@
 import "./styles.css";
 import { todoItem } from "./new-todo";
-import { de } from "date-fns/locale";
 
 //Array for storage
 let todoList = [];
 
-let tmp = new todoItem("Callums Thing", "", new Date("2025-06-02"), "Urgent", false);
+let tmp = new todoItem("Callums Thing", "asdasdsa", new Date("2025-06-02"), "High", false);
 todoList.push(tmp);
 todoUpdate(document.querySelector("#todoItems"), todoList);
 
@@ -36,14 +35,48 @@ submit.addEventListener("click", (e) => {
 //Close dialog
 const close = document.querySelector("#modalClose");
 close.addEventListener("click", (e) => {
+    document.querySelector("#addTodoForm").reset();
+    dialog.querySelector("#submitButton").textContent = "Add";
     dialog.close();
     e.preventDefault();
 })
 
+//Create new todo object
+function createTodoFromForm() {
+    let btn = dialog.querySelector("#submitButton");
+    if (btn.textContent == "Update"){
+        for (let [index, item] of todoList.entries()) {
+            if (item.id == btn.getAttribute("data-id")) {
+                document.querySelector(`[data-id="${item.id}"]`).remove();
+                todoList.splice(index, 1);
+            }
+        }
+    }
+
+    const title = document.querySelector("#title").value;
+    const desc = document.querySelector("#desc").value;
+    const due = new Date(document.querySelector("#dueDate").value);
+    const priority = document.querySelector('input[name="todoPriority"]:checked').value;
+    document.querySelector("#addTodoForm").reset();
+    dialog.querySelector("#submitButton").textContent = "Add";
+
+    return new todoItem(title, desc, due, priority, false);
+}
+
+//Insert sorted by date
+function insertTodoSorted(todo) {
+    for (let i = 0; i < todoList.length; i++) {
+        if (todoList[i].due >= todo.due) {
+            todoList.splice(i, 0, todo);
+            return;
+        }
+    }
+    todoList.push(todo);
+}
+
 //Update the dom
 function todoUpdate(todoList, arr){
     for (let [index, item] of arr.entries()) {
-        //put into if statement to check if exists by id
         if (!document.querySelector(`[data-id="${item.id}"]`)){
             const outerDiv = document.createElement("div");
             outerDiv.className = "todoItem";
@@ -65,8 +98,15 @@ function todoUpdate(todoList, arr){
             dueDate.textContent = `${String(item.due.getDate()).padStart(2, 0)}-${String(item.due.getMonth() + 1).padStart(2, 0)}-${item.due.getFullYear()}`
             dueDate.className = "due";
 
+            const edit = document.createElement("button");
+            edit.textContent = "Edit";
+
+            const trash = document.createElement("button");
+            trash.textContent = "Delete"
+
             //Create dialog that contains extra information
             const descDialog = document.createElement("dialog");
+            descDialog.className = "descDialog";
 
             const dialogTitle = document.createElement("h1");
             dialogTitle.textContent = `${item.title}`;
@@ -80,35 +120,39 @@ function todoUpdate(todoList, arr){
             const description = document.createElement("div");
             description.textContent = `${item.desc}`;
 
-            descDialog.append(dialogTitle, priority, dialogDueDate, description);
-            outerDiv.append(checkbox, title, detailButton, dueDate, descDialog);
+            const closeModal = document.createElement("button")
+            closeModal.textContent = "Close";
+
+            descDialog.append(dialogTitle, priority, dialogDueDate, description, closeModal);
+
+            //Create dialog that edits 
+            edit.addEventListener("click", () => {
+                const btn = dialog.querySelector("#submitButton");
+                btn.textContent = "Update";
+                btn.setAttribute('data-id', item.id);
+                dialog.querySelector("#title").value = item.title;
+                dialog.querySelector("#desc").value = item.desc;
+                dialog.querySelector("#dueDate").value = item.due.toISOString().slice(0, 10);
+                dialog.querySelector(`#${item.prio}`).checked = true;
+                dialog.showModal();
+            })
+
+            trash.addEventListener("click", () => {
+                outerDiv.remove();
+                arr.splice(index, 1);
+            })
+            
+            outerDiv.append(checkbox, title, detailButton, dueDate, descDialog, edit, trash);
             todoList.insertBefore(outerDiv, todoList.childNodes[index]);
 
-            //Add event listener to the button to open the description modal
+            //Add event listener to the button to open and close the description modal
             detailButton.addEventListener("click", () => {
                 descDialog.showModal();
             })
+            
+            closeModal.addEventListener("click", () => {
+                descDialog.close();
+            })
         }
     }
-}
-
-//Create new todo object
-function createTodoFromForm() {
-    const title = document.querySelector("#title").value;
-    const desc = document.querySelector("#desc").value;
-    const due = new Date(document.querySelector("#dueDate").value);
-    const priority = document.querySelector('input[name="todoPriority"]:checked').value;
-
-    return new todoItem(title, desc, due, priority, false);
-}
-
-//Insert sorted by date
-function insertTodoSorted(todo) {
-    for (let i = 0; i < todoList.length; i++) {
-        if (todoList[i].due >= todo.due) {
-            todoList.splice(i, 0, todo);
-            return;
-        }
-    }
-    todoList.push(todo);
 }

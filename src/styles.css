@@ -89,7 +89,9 @@ fieldset {
     background-color: #E9E9E9;
     margin: 20px;
     height: 40px;
+    gap: 10px;
     align-items: center;
+    padding: 10px;
 }
 
 .completed {
@@ -97,7 +99,6 @@ fieldset {
     width: 20px;
     accent-color: #90EE90;
     background-color: #FFFFFF;
-    margin-left: 20px;
 }
 
 .title {
@@ -106,9 +107,4 @@ fieldset {
 
 .detailButton {
     margin-left: auto;
-    margin-right: 20px;
-}
-
-.due {
-    margin-right: 20px;
 }
