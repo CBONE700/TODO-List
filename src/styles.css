@@ -23,7 +23,7 @@
 }
 
 #navbar {
-    background-color: #E9E9E9;
+    background-color: #B6B6B6;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -53,6 +53,8 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 10px;
+  border: 2px solid #FFC1CC;
 }
 
 form {
@@ -86,18 +88,20 @@ fieldset {
 
 #todoItems > * {
     display: flex;
-    background-color: #E9E9E9;
+    background-color: #B6B6B6;
     margin: 20px;
     height: 40px;
     gap: 10px;
     align-items: center;
     padding: 10px;
+    border-radius: 10px;
+    border: 2px solid #FFC1CC;
 }
 
 .completed {
     height: 20px;
     width: 20px;
-    accent-color: #90EE90;
+    accent-color: #FFC1CC;
     background-color: #FFFFFF;
 }
 
@@ -107,4 +111,69 @@ fieldset {
 
 .detailButton {
     margin-left: auto;
+}
+
+input[type='checkbox']:checked {
+  background-color: #FFC1CC;
+}
+
+input[type='checkbox']:checked:after {
+  content: '\2713';
+  color:white;
+}
+
+input[type='checkbox']{
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  width: 20px !important;
+  height: 20px !important;
+  appearance:none;
+  border-radius:10%;
+  border: 1px solid #FFC1CC;
+  box-shadow: none;
+  font-size: 1em;
+}
+
+.editBtn,
+.delBtn,
+.detailButton {
+    border: none;
+    background-color: #B6B6B6;
+}
+
+.editBtn > img, 
+.delBtn > img,
+.detailButton > img { 
+    height: 20px;
+    width: 20px;
+}
+
+.descDialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  min-height: 250px;
+  width: 400px;
+  border-radius: 10px;
+  border: 2px solid #FFC1CC;
+}
+
+.descDialog > div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+}
+
+.descDialog button {
+    border: none;
+    background-color: #FFC1CC;
+    color: #FFFFFF;
+    width: 50px;
+    height: 20px;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-top: auto;
 }

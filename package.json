@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/CBONE700/TODO-List#readme",
   "devDependencies": {
+    "asset": "^0.4.13",
     "css-loader": "^7.1.2",
+    "file-loader": "^6.2.0",
+    "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.3",
     "style-loader": "^4.0.0",
     "webpack": "^5.99.9",

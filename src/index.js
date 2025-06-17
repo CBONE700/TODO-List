@@ -1,5 +1,8 @@
 import "./styles.css";
 import { todoItem } from "./new-todo";
+import editImage from "./images/editing.png";
+import delImage from "./images/trash.png";
+import detailImage from "./images/details.png";
 
 //Array for storage
 let todoList = [];
@@ -91,39 +94,50 @@ function todoUpdate(todoList, arr){
             title.className = "title";
 
             const detailButton = document.createElement("button");
-            detailButton.textContent = "Details";
             detailButton.className = "detailButton";
+            const detailImg = document.createElement("img");
+            detailImg.src = detailImage;
+            detailButton.appendChild(detailImg);
 
             const dueDate = document.createElement("div");
             dueDate.textContent = `${String(item.due.getDate()).padStart(2, 0)}-${String(item.due.getMonth() + 1).padStart(2, 0)}-${item.due.getFullYear()}`
             dueDate.className = "due";
 
             const edit = document.createElement("button");
-            edit.textContent = "Edit";
+            edit.className = "editBtn";
+            const editImg = document.createElement("img");
+            editImg.src = editImage;
+            edit.appendChild(editImg);
 
             const trash = document.createElement("button");
-            trash.textContent = "Delete"
+            trash.className = "delBtn";
+            const delImg = document.createElement("img");
+            delImg.src = delImage;
+            trash.appendChild(delImg);
 
             //Create dialog that contains extra information
             const descDialog = document.createElement("dialog");
             descDialog.className = "descDialog";
 
+            const descDiv = document.createElement("div");
+
             const dialogTitle = document.createElement("h1");
             dialogTitle.textContent = `${item.title}`;
 
             const priority = document.createElement("div");
-            priority.textContent = `${item.prio}`;
+            priority.textContent = `Priority: ${item.prio}`;
 
             const dialogDueDate = document.createElement("div");
-            dialogDueDate.textContent = `${String(item.due.getDate()).padStart(2, 0)}-${String(item.due.getMonth() + 1).padStart(2, 0)}-${item.due.getFullYear()}`;
+            dialogDueDate.textContent = `Due Date: ${String(item.due.getDate()).padStart(2, 0)}-${String(item.due.getMonth() + 1).padStart(2, 0)}-${item.due.getFullYear()}`;
 
             const description = document.createElement("div");
-            description.textContent = `${item.desc}`;
+            description.textContent = `Description: ${item.desc}`;
 
             const closeModal = document.createElement("button")
             closeModal.textContent = "Close";
 
-            descDialog.append(dialogTitle, priority, dialogDueDate, description, closeModal);
+            descDiv.append(dialogTitle, priority, dialogDueDate, description, closeModal);
+            descDialog.appendChild(descDiv);
 
             //Create dialog that edits 
             edit.addEventListener("click", () => {
