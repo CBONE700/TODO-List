@@ -25,8 +25,8 @@ newTodo.addEventListener("click", () => {
 const edit = document.querySelector("#submitButtonEdit");
 edit.addEventListener("click", (e) => {
     const form = document.querySelector("#editTodoForm")
-    if (!form.checkValidity()) {
-        alert("Please fill out all required fields.");
+    if (!form.checkValidity() || /^[0-9]$/.test(document.querySelector("#titleProj").value.charAt(0))) {
+        alert("Please fill out all required fields correctly.");
     }
     else {
         insertTodoSorted(createTodoFromForm("edit"));

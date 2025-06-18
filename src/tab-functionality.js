@@ -135,8 +135,8 @@ function todoForm (type) {
         btns.append(submitBtn, closeBtn);
 
         submitBtn.addEventListener("click", (e) => {
-            if (!form.checkValidity()) {
-                alert("Please fill out all required fields.");
+            if (!form.checkValidity() || /^[0-9]$/.test(document.querySelector("#titleProj").value.charAt(0))) {
+                alert("Please fill out all required fields correctly.");
             }
             else {
                 insertTodoSorted(createTodoFromForm("add"));
@@ -177,8 +177,8 @@ function todoForm (type) {
         btns.append(submitBtn, closeBtn);
 
         submitBtn.addEventListener("click", (e) => {
-            if (!form.checkValidity()) {
-                alert("Please fill out all required fields.");
+            if (!form.checkValidity() || /^[0-9]$/.test(document.querySelector("#titleProj").value.charAt(0))) {
+                alert("Please fill out all required fields correctly.");
             }
             else {
                 insertProject(projectList);

@@ -27,7 +27,6 @@ function insertProject(projectList) {
     const project = document.querySelector("#titleProj");
     projectList.push(project.value);
     saveProjects();
-
 }
 
 function displayProjects(projects) {
