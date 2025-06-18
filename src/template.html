@@ -13,23 +13,33 @@
             <div id="Today">Today</div>
             <div id="Week">Week</div>
             <div id="Projects">Projects</div>
-            <button id="modalOpen">+</button>
+            <button id="modalOpenAdd">+</button>
         </div>
         <div id="todoItems">
         </div>
         <dialog id="addTodoDialog">
-            <form method="dialog" id="addTodoForm">
-                    <label for="title"><div>Title:</div><input type="text" id="title" name="todoTitle" required></label>
-                    <label for="desc"><div>Description:</div><textarea id="desc" name="todoDescription" rows="4" cols="40"></textarea></label>
-                    <label for="dueDate"><div>Due Date:</div><input type="date" id="dueDate" name="todoDueDate" required></label>
+            <div>
+                <div id="objectType">
+                    <div id="todoHeading">TODO</div>
+                    <div id="projectHeading">Project</div>
+                </div>
+                <form method="dialog" id="addTodoForm">
+                </form>
+            </div>
+        </dialog>
+        <dialog id="editTodoDialog">
+            <form method="dialog" id="editTodoForm">
+                    <label for="titleEdit"><div>Title:</div><input type="text" id="titleEdit" name="todoTitle" required></label>
+                    <label for="descEdit"><div>Description:</div><textarea id="descEdit" name="todoDescription" rows="4" cols="40"></textarea></label>
+                    <label for="dueDateEdit"><div>Due Date:</div><input type="date" id="dueDateEdit" name="todoDueDate" required></label>
                     <fieldset>
                         <legend>Priority</legend>
-                        <label for="Urgent"><div>Urgent</div><input type="radio" id="Urgent" name="todoPriority" value="Urgent" checked></label>
-                        <label for="High"><div>High</div><input type="radio" id="High" name="todoPriority" value="High"></label>
-                        <label for="Medium"><div>Medium</div><input type="radio" id="Medium" name="todoPriority" value="Medium"></label>
-                        <label for="Low"><div>Low</div><input type="radio" id="Low" name="todoPriority" value="Low"></label>
+                        <label for="UrgentEdit"><div>Urgent</div><input type="radio" id="UrgentEdit" name="todoPriorityEdit" value="Urgent" checked></label>
+                        <label for="HighEdit"><div>High</div><input type="radio" id="HighEdit" name="todoPriorityEdit" value="High"></label>
+                        <label for="MediumEdit"><div>Medium</div><input type="radio" id="MediumEdit" name="todoPriorityEdit" value="Medium"></label>
+                        <label for="LowEdit"><div>Low</div><input type="radio" id="LowEdit" name="todoPriorityEdit" value="Low"></label>
                     </fieldset>
-                    <div><button autofocus type="submit" id="submitButton">Add</button> <button autofocus id="modalClose">Close</button></div>
+                    <div><button autofocus type="submit" id="submitButtonEdit">Update</button> <button autofocus id="modalCloseEdit">Close</button></div>
             </form>
         </dialog>
     </div>

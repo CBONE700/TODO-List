@@ -48,13 +48,33 @@
     margin-bottom: 20px;
 }
 
-#addTodoDialog {
+#addTodoDialog, #editTodoDialog {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
   border: 2px solid #FFC1CC;
+  height: 330px;
+  width: 600px;
+}
+
+#addTodoDialog > div {
+    display: flex;
+}
+
+#objectType {
+    font-size: 24px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 40px;
+    background-color: #B6B6B6;
+    color: #FFC1CC;
+    height: 325px;
+}
+
+#objectType > * {
+    padding-bottom: 10px;
 }
 
 form {
@@ -76,7 +96,7 @@ fieldset {
     padding: 10px;
 }
 
-#submitButton, #modalClose{
+#submitButtonAdd, #modalCloseAdd, #submitButtonEdit, #modalCloseEdit {
     border: none;
     background-color: #FFC1CC;
     color: #FFFFFF;
