@@ -1,6 +1,7 @@
 import "./styles.css";
-import { createTodoFromForm, insertTodoSorted, todoUpdate, todoList } from "./todo-functionality";
+import { createTodoFromForm, insertTodoSorted } from "./todo-functionality";
 import { todoForm } from "./tab-functionality";
+import { getprojectTodo } from "./project-functionality";
 
 //Open dialog to add new todo/project
 const newTodo = document.querySelector("#modalOpenAdd");
@@ -21,7 +22,7 @@ edit.addEventListener("click", (e) => {
     }
     else {
         insertTodoSorted(createTodoFromForm("edit"));
-        todoUpdate(document.querySelector("#todoItems"));
+        getprojectTodo();
         document.querySelector("#editTodoDialog").close();
     }
     e.preventDefault();

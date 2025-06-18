@@ -1,6 +1,5 @@
-import { createTodoFromForm, insertTodoSorted, todoUpdate } from "./todo-functionality";
-import { insertProject } from "./project-functionality";
-import { tr } from "date-fns/locale";
+import { createTodoFromForm, insertTodoSorted } from "./todo-functionality";
+import { insertProject, displayProjects, getprojectTodo } from "./project-functionality";
 
 const projectList = [];
 
@@ -142,7 +141,7 @@ function todoForm (type) {
             }
             else {
                 insertTodoSorted(createTodoFromForm("add"));
-                todoUpdate(document.querySelector("#todoItems"));
+                getprojectTodo();
                 document.querySelector("#addTodoDialog").close();
             }
             e.preventDefault();
@@ -184,8 +183,8 @@ function todoForm (type) {
             }
             else {
                 insertProject(projectList);
+                displayProjects(projectList);
                 document.querySelector("#addTodoDialog").close();
-                //NEED TO ADD PROJECT HANDLING
             }
             e.preventDefault();
         })

@@ -5,6 +5,18 @@
     box-sizing: border-box;
 }
 
+#Projects {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#Projects > div {
+    font-size: 18px;
+    padding-left: 20px;
+    margin-right: 20px;
+}
+
 #bar {
     width: 100vw;
     height: 70px;
@@ -23,6 +35,7 @@
 }
 
 #navbar {
+    width: 300px;
     background-color: #B6B6B6;
     display: flex;
     flex-direction: column;

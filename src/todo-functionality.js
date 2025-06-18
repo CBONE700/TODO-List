@@ -3,7 +3,7 @@ import delImage from "./images/trash.png";
 import detailImage from "./images/details.png";
 import { todoItem } from "./todo-class";
 
-let todoList = [];
+let homeList = [];
 
 //Create new todo object
 function createTodoFromForm(type) {
@@ -23,10 +23,10 @@ function createTodoFromForm(type) {
         priority = document.querySelector('input[name="todoPriorityEdit"]:checked').value;
         document.querySelector("#editTodoForm").reset();
         document.querySelector(`[data-id="${document.querySelector("#submitButtonEdit").getAttribute('data-id')}"]`).remove();
-        for (let i = 0; i < todoList.length; i++) {
-            if (todoList[i].id == document.querySelector("#submitButtonEdit").getAttribute('data-id')) {
-                project = todoList[i].project;
-                todoList.splice(i, 1);
+        for (let i = 0; i < homeList.length; i++) {
+            if (homeList[i].id == document.querySelector("#submitButtonEdit").getAttribute('data-id')) {
+                project = homeList[i].project;
+                homeList.splice(i, 1);
                 break;
             }
         }
@@ -37,18 +37,18 @@ function createTodoFromForm(type) {
 
 //Insert sorted by date
 function insertTodoSorted(todo) {
-    for (let i = 0; i < todoList.length; i++) {
-        if (todoList[i].due >= todo.due) {
-            todoList.splice(i, 0, todo);
+    for (let i = 0; i < homeList.length; i++) {
+        if (homeList[i].due >= todo.due) {
+            homeList.splice(i, 0, todo);
             return;
         }
     }
-    todoList.push(todo);
+    homeList.push(todo);
 }
 
 //Update the dom
-function todoUpdate(todoItems){
-    for (let [index, item] of todoList.entries()) {
+function todoUpdate(todoItems, arr){
+    for (let [index, item] of arr.entries()) {
         if (!todoItems.querySelector(`[data-id="${item.id}"]`)){
             const outerDiv = document.createElement("div");
             outerDiv.className = "todoItem";
@@ -120,7 +120,7 @@ function todoUpdate(todoItems){
 
             trash.addEventListener("click", () => {
                 outerDiv.remove();
-                todoList.splice(index, 1);
+                homeList.splice(index, 1);
             })
             
             outerDiv.append(checkbox, title, detailButton, dueDate, descDialog, edit, trash);
@@ -138,4 +138,4 @@ function todoUpdate(todoItems){
     }
 }
 
-export { createTodoFromForm, insertTodoSorted, todoUpdate, todoList };
+export { createTodoFromForm, insertTodoSorted, todoUpdate, homeList };
