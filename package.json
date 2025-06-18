@@ -1,10 +1,14 @@
 {
+  "homepage": "http://CBONE700.github.io/TODO-List",
   "name": "todo-list",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack serve --mode development",
+    "build": "webpack --mode production",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -16,11 +20,11 @@
   "bugs": {
     "url": "https://github.com/CBONE700/TODO-List/issues"
   },
-  "homepage": "https://github.com/CBONE700/TODO-List#readme",
   "devDependencies": {
     "asset": "^0.4.13",
     "css-loader": "^7.1.2",
     "file-loader": "^6.2.0",
+    "gh-pages": "^6.3.0",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.3",
     "style-loader": "^4.0.0",
