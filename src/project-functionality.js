@@ -1,5 +1,6 @@
 import { todoUpdate } from "./todo-functionality";
 import { saveHomeList, saveProjects, homeList, projectList } from "./storage-functionality";
+import delImage from "./images/trash.png";
 
 let prevClicked = "Home";
 const todoItems = document.querySelector("#todoItems");
@@ -55,7 +56,7 @@ function displayProjects(projects) {
             })
 
             let projectDel = document.createElement("button");
-            projectDel.textContent = "Del";
+            projectDel.className = "delBtn";
             projectDel.addEventListener("click", () => {
                 for (let i = 0; i < projectList.length; i++) {
                     if (projectList[i] == project) {
@@ -75,6 +76,9 @@ function displayProjects(projects) {
                 saveHomeList();
                 saveProjects();
             })
+            const delImg = document.createElement("img");
+            delImg.src = delImage;
+            projectDel.appendChild(delImg);
 
             projectDiv.append(projectBtn, projectDel)
             projectHeader.append(projectDiv);
