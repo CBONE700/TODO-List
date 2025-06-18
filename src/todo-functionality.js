@@ -2,8 +2,8 @@ import editImage from "./images/editing.png";
 import delImage from "./images/trash.png";
 import detailImage from "./images/details.png";
 import { todoItem } from "./todo-class";
-
-let homeList = [];
+import { saveHomeList, homeList } from "./storage-functionality";
+import { tr } from "date-fns/locale";
 
 //Create new todo object
 function createTodoFromForm(type) {
@@ -40,10 +40,12 @@ function insertTodoSorted(todo) {
     for (let i = 0; i < homeList.length; i++) {
         if (homeList[i].due >= todo.due) {
             homeList.splice(i, 0, todo);
+            saveHomeList();
             return;
         }
     }
     homeList.push(todo);
+    saveHomeList();
 }
 
 //Update the dom
@@ -57,6 +59,11 @@ function todoUpdate(todoItems, arr){
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.className = "completed";
+            checkbox.checked = item.checklist ?? false;
+            checkbox.addEventListener("click", () => {
+                item.checklist = checkbox.checked;
+                saveHomeList();
+            });
 
             const title = document.createElement("div");
             title.textContent = `${item.title}`;
@@ -121,6 +128,7 @@ function todoUpdate(todoItems, arr){
             trash.addEventListener("click", () => {
                 outerDiv.remove();
                 homeList.splice(index, 1);
+                saveHomeList();
             })
             
             outerDiv.append(checkbox, title, detailButton, dueDate, descDialog, edit, trash);

@@ -1,7 +1,15 @@
 import "./styles.css";
 import { createTodoFromForm, insertTodoSorted } from "./todo-functionality";
 import { todoForm } from "./tab-functionality";
-import { getprojectTodo } from "./project-functionality";
+import { getprojectTodo, displayProjects } from "./project-functionality";
+import { loadHomeList, loadProjects, projectList } from "./storage-functionality";
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadHomeList();
+    loadProjects();
+    displayProjects(projectList);
+    getprojectTodo();
+})
 
 //Open dialog to add new todo/project
 const newTodo = document.querySelector("#modalOpenAdd");
@@ -37,3 +45,13 @@ const projectHeading = document.querySelector("#projectHeading");
 projectHeading.addEventListener("click", () => {
     todoForm("project");
 })
+
+const btns = document.querySelectorAll("button");
+for (let btn of btns) {
+    btn.addEventListener("mouseover", () => {
+        btn.style.color = "#D90166";
+    })
+    btn.addEventListener("mouseout", () => {
+        btn.style.removeProperty("color");
+    })
+}

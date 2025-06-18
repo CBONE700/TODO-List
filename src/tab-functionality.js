@@ -1,7 +1,6 @@
 import { createTodoFromForm, insertTodoSorted } from "./todo-functionality";
 import { insertProject, displayProjects, getprojectTodo } from "./project-functionality";
-
-const projectList = [];
+import { projectList } from "./storage-functionality";
 
 function todoForm (type) {
     const form = document.querySelector("#addTodoForm");

@@ -1,6 +1,8 @@
-import { homeList, todoUpdate } from "./todo-functionality";
+import { todoUpdate } from "./todo-functionality";
+import { saveHomeList, saveProjects, homeList, projectList } from "./storage-functionality";
 
 let prevClicked = "Home";
+const todoItems = document.querySelector("#todoItems");
 
 const home = document.querySelector("#Home");
 home.addEventListener("click", () => {
@@ -23,19 +25,58 @@ week.addEventListener("click", () => {
 function insertProject(projectList) {
     const project = document.querySelector("#titleProj");
     projectList.push(project.value);
+    saveProjects();
+
 }
 
-function displayProjects(projectList) {
+function displayProjects(projects) {
     const projectHeader = document.querySelector("#Projects");
-    for (let project of projectList) {
+    projectHeader.textContent = "";
+    const heading = document.createElement("div");
+    heading.textContent = "Projects";
+    projectHeader.append(heading);
+    for (let project of projects) {
         if (!document.querySelector(`#${project.replace(/\s/g, "")}`)){
             let projectDiv = document.createElement("div");
-            projectDiv.textContent = `${project}`;
-            projectDiv.setAttribute("id", `${project.replace(/\s/g, "")}`);
-            projectDiv.addEventListener("click", () => {
+            projectDiv.setAttribute("id", `${project.replace(/\s/g, "")}`)
+
+            let projectBtn = document.createElement("button");
+            projectBtn.textContent = `${project}`;
+            projectBtn.setAttribute("id", `${project.replace(/\s/g, "")}`);
+            projectBtn.addEventListener("click", () => {
                 prevClicked = `${project}`;
                 getprojectTodo();
             })
+            projectBtn.addEventListener("mouseover", () => {
+                projectBtn.style.color = "#D90166";
+            })
+            projectBtn.addEventListener("mouseout", () => {
+                projectBtn.style.removeProperty("color");
+            })
+
+            let projectDel = document.createElement("button");
+            projectDel.textContent = "Del";
+            projectDel.addEventListener("click", () => {
+                for (let i = 0; i < projectList.length; i++) {
+                    if (projectList[i] == project) {
+                        projectList.splice(i, 1);
+                    }
+                }
+                for (let i = 0; i < homeList.length; i++) {
+                    if (homeList[i].project == project) {
+                        const todoItem = todoItems.querySelector(`[data-id="${homeList[i].id}"]`);
+                        todoItem.remove();
+                        homeList.splice(i, 1);
+                    }
+                }
+                prevClicked = "Home";
+                getprojectTodo();
+                displayProjects(projectList);
+                saveHomeList();
+                saveProjects();
+            })
+
+            projectDiv.append(projectBtn, projectDel)
             projectHeader.append(projectDiv);
         }
     }
@@ -46,7 +87,6 @@ function getprojectTodo() {
         todoUpdate(todoItems, homeList);
     }
     else {
-        const todoItems = document.querySelector("#todoItems");
         todoItems.textContent = '';
         let projArr = [];
         if (prevClicked == "Today") {
